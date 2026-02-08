@@ -71,16 +71,30 @@ The core principle of the database design is to maintain a clear separation of c
 Relationships:
 
 - 1 Quest can have only 1 Npc, but one Npc can have many Quests (one-to-many relationship through NpcQuests table)\
--
+- 1 Quest can have many Rewards, and each Reward can be associated with many Quests (many-to-many relationship through QuestRewards table)
+- 1 Quest can belong to many Quest Groups, and each Quest Group can have many Quests (many-to-many relationship through GroupQuests table)
+- 1 Quest can have many Quest Steps, but each Quest Step belongs to only one Quest (one-to-many relationship)
 
 ### QuestTypes
 
 - n&d
 - type - Enum (Main Story, Side Quest, Daily Quest, Event Quest, etc.)
 
-### Quest Groups
+### QuestSteps
 
-Description: This table captures the grouping of quests, which can be used to organize quests into categories or storylines. For example, a quest group could represent a specific storyline, faction, or region in the game.
+- n&d
+- type - Enum (Kill, Collect, Talk, Explore, etc.)
+- target_id - Integer representing the ID of the target entity (e.g., mob ID for kill quests, item ID for collect quests, NPC ID for talk quests, location ID for explore quests)
+- quantity - Integer representing the quantity required for the quest step (e.g., number of mobs to kill, number of items to collect)
+- need_to_use_item - Boolean indicating whether the quest step requires the player to use a specific item (e.g., use an item on a mob or at a location)
+- instance_id - Foreign key referencing Instances table (nullable, if the quest step does not take place in an instance)
+- is_in_special_cube - Boolean indicating whether the quest step takes place in a special cube instance
+- location_id - Foreign key referencing Locations table (nullable, if the quest step does not have a specific location requirement)
+- quest_id - Foreign key referencing Quests table
+
+### QuestGroups
+
+Description: This table captures the grouping of quests, which can be used to organize quests into categories. For example, a quest group could represent a specific map or all daily quests in the game.
 
 - n&d
 - likable
@@ -89,22 +103,20 @@ Relationships:
 
 - 1 Quest can belong to many Quest Groups, and each Quest Group can have many Quests (many-to-many relationship)
 
-### Rewards (junction table for many-to-many relationship between RewardSources and Items)
+### Rewards
 
 - n&d
-
 - quantity - Integer, the amount of the item rewarded
 - reward_source_id - Foreign key referencing RewardSources table
 - item_id - Foreign key referencing Items table
 
-### RewardSources
+### QuestRewards (junction table for many-to-many relationship between Quests and Rewards)
 
 - n&d
-
 - quest_id - Foreign key referencing Quests table (nullable, if the reward source is not a quest)
-- world_event_id - Foreign key referencing WorldEvents table (nullable, if the reward source is not a world event)
+- reward_id - Foreign key referencing Rewards table
 
-Description: This table captures the various sources from which players can obtain rewards, such as quests, bosses, or events. It allows for a flexible association of rewards with multiple sources.
+Description: This table captures the rewards that can be obtained from completing quests. Each reward can be associated with a specific quest, and the quantity of the reward can be specified. This allows for a flexible reward system where multiple rewards can be given for a single quest, and the same reward can be given for multiple quests.
 
 ### Maps
 
@@ -249,3 +261,4 @@ Relationships:
 
 - n&d
   type - Enum (e.g., XP, Kinah, PvP Gear, PvE Gear, Cosmetics, etc.)
+
