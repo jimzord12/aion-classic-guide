@@ -1,3 +1,15 @@
 {
-  "cSpell.words": ["aion", "elysia"]
+  "cSpell.words": ["aion", "elysia"],
+
+  // Markdown PDF settings
+  "markdown-pdf.styles": ["docs/pdf/markdown-pdf-styles.css"],
+  "markdown-pdf.scale": 1,
+  "markdown-pdf.displayHeaderFooter": false,
+  "markdown-pdf.height": "2960px",
+  "markdown-pdf.margin.top": "0mm",
+  "markdown-pdf.margin.right": "0mm",
+  "markdown-pdf.margin.bottom": "0mm",
+  "markdown-pdf.margin.left": "0mm",
+  "markdown-pdf.printBackground": true
 }
+

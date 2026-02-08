@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=IM+Fell+English&display=swap');
+
+html {
+  background: linear-gradient(135deg, #2b0a4b 0%, #2b2f7a 45%, #4f9bd9 100%);
+}
+
+body {
+  font-family: 'IM Fell English', serif;
+  line-height: 1.5;
+  color: #ebebeb;
+  margin: 0 auto;
+  padding: 36px;
+  background: linear-gradient(135deg, #2b0a4b 0%, #2b2f7a 45%, #4f9bd9 100%);
+  max-height: 1000vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: 0.5px;
+  color: #ebebeb;
+  page-break-after: avoid;
+}
